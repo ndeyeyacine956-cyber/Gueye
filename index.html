@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini-boutique — Exemple de vente de produit</title>
+  <meta name="description" content="Exemple simple d'une page de vente sans JavaScript (HTML + CSS uniquement)." />
+  <style>
+    :root{
+      --accent:#0b74de;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --muted:#64748b;
+      --radius:14px;
+      --max-width:1100px;
+      --gap:18px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#ffffff);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px 16px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      gap:24px;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:22px;
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit
+    }
+    .logo{
+      width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#3ddc97);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;
+    }
+
+    nav .actions{display:flex;gap:10px;align-items:center}
+    .btn{
+      padding:10px 14px;border-radius:10px;border:0;background:var(--card);box-shadow:0 1px 2px rgba(15,23,42,0.06);cursor:pointer;font-weight:600;text-decoration:none;color:var(--accent);display:inline-flex;align-items:center;gap:8px}
+
+    .hero{
+      display:flex;flex-wrap:wrap;gap:20px;padding:20px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.4));border-radius:16px;margin-bottom:20px;align-items:center;justify-content:space-between
+    }
+    .hero-left{flex:1;min-width:260px}
+    .hero h1{margin:0 0 8px;font-size:28px}
+    .hero p{margin:0;color:var(--muted)}
+
+    .hero-cta{margin-top:12px;display:flex;gap:10px}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:var(--gap);
+    }
+
+    @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
+
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 6px 18px rgba(12,20,40,0.06);
+      display:flex;flex-direction:column;
+      transition:transform .18s ease,box-shadow .18s ease;
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(12,20,40,0.08)}
+
+    .media{
+      width:100%;height:180px;object-fit:cover;display:block
+    }
+
+    .card-body{padding:14px;display:flex;flex-direction:column;gap:10px}
+    .title{font-weight:700}
+    .desc{font-size:13px;color:var(--muted)}
+    .price-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+    .price{font-weight:800}
+    .tag{font-size:12px;padding:6px 8px;background:#eef6ff;color:var(--accent);border-radius:999px}
+
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+
+    .footer{
+      margin-top:26px;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px;padding:12px 6px
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a class="brand" href="#">
+        <div class="logo">MB</div>
+        <div>
+          <div style="font-weight:800">Mini-boutique</div>
+          <div style="font-size:12px;color:var(--muted)">Produits sélectionnés · Sans JavaScript</div>
+        </div>
+      </a>
+
+      <nav class="actions">
+        <a class="btn" href="#">Catégories</a>
+        <a class="btn" href="#">Mon compte</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Offres du jour — Trouvez le bon produit</h1>
+        <p>Une mini-boutique simple en HTML & CSS. Images serveurs de démonstration (picsum.photos). Aucun JavaScript — tout est accessible et réactif.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#">Voir les produits</a>
+          <a class="btn" href="#">Contact</a>
+        </div>
+      </div>
+
+      <div style="min-width:220px;display:flex;align-items:center;justify-content:center">
+        <img src="https://picsum.photos/seed/hero/420/300" alt="Hero produit" style="width:100%;max-width:360px;border-radius:12px;box-shadow:0 8px 28px rgba(11,116,222,0.06)">
+      </div>
+    </section>
+
+    <main>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0">
+        <h2 style="margin:0">Nos produits</h2>
+        <div class="muted">Affichage: 8 produits</div>
+      </div>
+
+      <div class="grid">
+
+        <!-- Produit 1 -->
+        <article class="card">
+          <img class="media" src="https://picsum.photos/seed/p1/800/600" alt="Chaussures stylées">
+          <div class="card-body">
+            <div class="title">Chaussures Urbaines</div>
+            <div class="desc">Confortables et légères — idéales pour la ville.</div>
+            <div class="price-row">
+              <div class="price">29 900 FCFA</div>
+              <div class="tag">Nouveau</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Produit 2 -->
+        <article class="card">
+          <img class="media" src="sac.jpg" alt="Sac à dos">
+          <div class="card-body">
+            <div class="title">Sac à dos Compact</div>
+            <div class="desc">Organisation intérieure soignée, poche pour ordinateur 13".</div>
+            <div class="price-row">
+              <div class="price">19 500 FCFA</div>
+              <div class="tag">Meilleur choix</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Produit 3 -->
+        <article class="card">
+          <img class="media" src="https://picsum.photos/seed/p3/800/600" alt="Montre minimaliste">
+          <div class="card-body">
+            <div class="title">Montre Minimal</div>
+            <div class="desc">Design épuré, bracelet interchangeable.</div>
+            <div class="price-row">
+              <div class="price">24 000 FCFA</div>
+              <div class="tag">En stock</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Produit 4 -->
+        <article class="card">
+          <img class="media" src="https://picsum.photos/seed/p4/800/600" alt="Casque audio">
+          <div class="card-body">
+            <div class="title">Casque Audio</div>
+            <div class="desc">Son clair, réduction passive du bruit.</div>
+            <div class="price-row">
+              <div class="price">15 800 FCFA</div>
+              <div class="tag">Promo</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Produit 5 -->
+        <article class="card">
+          <img class="media" src="https://picsum.photos/seed/p5/800/600" alt="Lampe de bureau">
+          <div class="card-body">
+            <div class="title">Lampe LED</div>
+            <div class="desc">Éclairage doux pour le bureau ou la chambre.</div>
+            <div class="price-row">
+              <div class="price">6 900 FCFA</div>
+              <div class="tag">Éco</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Produit 6 -->
+        <article class="card">
+          <img class="media" src="https://picsum.photos/seed/p6/800/600" alt="Tasse en céramique">
+          <div class="card-body">
+            <div class="title">Tasse Céramique</div>
+            <div class="desc">Capacité 350ml, parfaite pour le café.</div>
+            <div class="price-row">
+              <div class="price">2 200 FCFA</div>
+              <div class="tag">Populaire</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Produit 7 -->
+        <article class="card">
+          <img class="media" src="https://picsum.photos/seed/p7/800/600" alt="Coussin décoratif">
+          <div class="card-body">
+            <div class="title">Coussin Déco</div>
+            <div class="desc">Housse lavable, motif moderne.</div>
+            <div class="price-row">
+              <div class="price">3 400 FCFA</div>
+              <div class="tag">Design</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Produit 8 -->
+        <article class="card">
+          <img class="media" src="https://picsum.photos/seed/p8/800/600" alt="Écouteurs sans fil">
+          <div class="card-body">
+            <div class="title">Écouteurs Sans Fil</div>
+            <div class="desc">Autonomie longue durée et boîtier de charge.</div>
+            <div class="price-row">
+              <div class="price">12 500 FCFA</div>
+              <div class="tag">Offre</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="footer">
+        <div>© 2025 Mini-boutique</div>
+        <div class="muted">Contact: contact@mini-boutique.test</div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
